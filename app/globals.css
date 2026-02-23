@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --accent-red: #ef4444;
+  --accent-green: #22c55e;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Noise Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 50;
+  filter: contrast(150%) brightness(100%);
+}
+
+/* Ambient Plasma Background */
+.plasma-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--background);
+}
+
+.plasma-sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.05;
+  animation: plasma 20s ease-in-out infinite;
+}
+
+.plasma-1 {
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, var(--accent-red) 0%, transparent 70%);
+  top: -10%;
+  left: -10%;
+}
+
+.plasma-2 {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, var(--accent-green) 0%, transparent 70%);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-xl border border-white/20 rounded-2xl transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    @apply bg-white/80 border-white/40 shadow-xl shadow-slate-200/50;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .red-glow {
+    text-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+  }
+
+  .green-glow {
+    text-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+[dir='rtl'] {
+  direction: rtl;
+}
+
+[dir='ltr'] {
+  direction: ltr;
+}
+
+html[lang='ar'] {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
